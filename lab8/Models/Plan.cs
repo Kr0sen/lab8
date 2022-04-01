@@ -15,21 +15,18 @@ namespace lab8.Models
 {
     public class Plan : INotifyPropertyChanged
     {
-        public Plan(string n)
+        public Plan(string n = "", string d = "", string p = "")
         {
             Name = n;
-        }
-        public Plan(string n, string d) : this(n)
-        {
             Description = d;
-        }
-        public Plan(string n, string d, string p) : this(n, d)
-        {
-            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-            string assemblyName = Assembly.GetEntryAssembly().GetName().Name;
-            var uri = new Uri($"avares://{assemblyName}{p}");
-            var bitmap = new Bitmap(assets.Open(uri));
-            Image = bitmap;
+            if (p.Length > 0)
+            {
+                var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
+                string assemblyName = Assembly.GetEntryAssembly().GetName().Name;
+                var uri = new Uri($"avares://{assemblyName}{p}");
+                var bitmap = new Bitmap(assets.Open(uri));
+                Image = bitmap;
+            }
         }
         string _name = "";
         public string Name

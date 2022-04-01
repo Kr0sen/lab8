@@ -29,4 +29,9 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.12" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\AddPlanView.axaml.cs">
+      <DependentUpon>AddPlanView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
