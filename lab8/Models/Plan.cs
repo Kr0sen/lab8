@@ -15,17 +15,16 @@ namespace lab8.Models
 {
     public class Plan : INotifyPropertyChanged
     {
-        public Plan(string n = "", string d = "", string p = "")
+        public Plan()
+        {
+        }
+        public Plan(string n = "", string d = "", string? p = null)
         {
             Name = n;
             Description = d;
-            if (p.Length > 0)
+            if (p is not null)
             {
-                var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-                string assemblyName = Assembly.GetEntryAssembly().GetName().Name;
-                var uri = new Uri($"avares://{assemblyName}{p}");
-                var bitmap = new Bitmap(assets.Open(uri));
-                Image = bitmap;
+                ImagePath = p;
             }
         }
         string _name = "";
@@ -56,6 +55,17 @@ namespace lab8.Models
             {
                 _image = value;
                 NotifyPropertyChanged(nameof(Image));
+            }
+        }
+        string? _imagePath = null;
+        public string? ImagePath
+        {
+            get => _imagePath;
+            set
+            {
+                _imagePath = value;
+                Image = new Bitmap(value);
+                NotifyPropertyChanged(nameof(ImagePath));
             }
         }
         public event PropertyChangedEventHandler? PropertyChanged;

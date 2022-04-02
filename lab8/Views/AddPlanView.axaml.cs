@@ -54,7 +54,7 @@ namespace lab8.Views
             path = pathArray is null ? null : string.Join(@"\", pathArray);
             if (path != null)
             {
-                (this.DataContext as AddPlanViewModel).PlanToReturn.Image = new Bitmap(path);
+                (this.DataContext as AddPlanViewModel).PlanToReturn.ImagePath = path;
             }
         }
     }

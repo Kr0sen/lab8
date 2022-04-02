@@ -7,6 +7,7 @@ using Avalonia.Interactivity;
 using System.ComponentModel;
 using ReactiveUI;
 using System.Reactive;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using lab8.Models;
@@ -22,6 +23,12 @@ namespace lab8.ViewModels
                 ItemsPlanned = makePlansTODO();
                 ItemsInWork = makePlansInWork();
                 ItemsCompleted = makePlansCompleted();
+            }
+            else
+            {
+                ItemsPlanned = new ObservableCollection<Plan>();
+                ItemsInWork = new ObservableCollection<Plan>();
+                ItemsCompleted = new ObservableCollection<Plan>();
             }
             ButtonAddImage = ReactiveCommand.Create<Plan, Unit>((item) =>
             {
@@ -68,7 +75,9 @@ namespace lab8.ViewModels
             {
                 new Plan("Planned Task 1"),
                 new Plan("Planned Task 2", "put something here"),
-                new Plan("Planned Task 3", "aeiou", "/Assets/avalonia-logo.ico")
+                new Plan("Planned Task 3", "aeiou",
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName
+                + "/Assets/avalonia-logo.ico")
             };
         }
         private ObservableCollection<Plan> makePlansInWork()
@@ -77,7 +86,9 @@ namespace lab8.ViewModels
             {
                 new Plan("InWork Task 1"),
                 new Plan("InWork Task 2", "something"),
-                new Plan("InWork Task 3", "yee", "/Assets/add.ico")
+                new Plan("InWork Task 3", "yee",
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName
+                + "/Assets/add.ico")
             };
         }
         private ObservableCollection<Plan> makePlansCompleted()
@@ -87,7 +98,9 @@ namespace lab8.ViewModels
 
                 new Plan("Completed Task 1"),
                 new Plan("Completed Task 2", "| || || |_"),
-                new Plan("Completed Task 3", "sus", "/Assets/avalonia-logo-but-better.ico")
+                new Plan("Completed Task 3", "sus",
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName
+                + "/Assets/avalonia-logo-but-better.ico")
             };
         }
         public ReactiveCommand<Plan, Unit> ButtonAddImage { get; }
