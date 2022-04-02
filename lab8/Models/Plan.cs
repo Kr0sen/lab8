@@ -63,6 +63,14 @@ namespace lab8.Models
             get => _imagePath;
             set
             {
+                try
+                {
+                    var bm = new Bitmap(value);
+                }
+                catch (Exception ex)
+                {
+                    return;
+                }
                 _imagePath = value;
                 Image = new Bitmap(value);
                 NotifyPropertyChanged(nameof(ImagePath));
